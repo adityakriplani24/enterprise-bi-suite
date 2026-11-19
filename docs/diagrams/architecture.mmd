@@ -1,0 +1,9 @@
+flowchart LR
+  A[("AdventureWorksDW<br/>SQL Server (dbo)")] --> B["bi.* star-schema views"]
+  A -->|"ADF Copy pipeline<br/>or SQL Agent nightly job"| C[("stg.FactSales<br/>+ stg.EtlLog")]
+  B --> D["Power Query<br/>clean and shape"]
+  S[("bi.SecurityMap<br/>email to region")] --> E
+  D --> E["Power BI semantic model<br/>DAX measures + RLS roles"]
+  E --> F["Power BI Service<br/>scheduled refresh"]
+  F --> G["Executive pages<br/>+ drill-through"]
+  F --> H["Region managers<br/>see own region only"]

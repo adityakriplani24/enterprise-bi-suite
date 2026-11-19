@@ -1,0 +1,76 @@
+// =====================================================================
+// Measures for the Enterprise BI Suite.  Create in a table named "_Measures".
+// Model relationships (all many-to-one, single direction):
+//   FactSales[OrderDateKey]  -> DimDate[DateKey]      (mark DimDate[Date] as Date table)
+//   FactSales[ProductKey]    -> DimProduct[ProductKey]
+//   FactSales[RegionKey]     -> DimRegion[RegionKey]
+//   FactSales[EmployeeKey]   -> DimEmployee[EmployeeKey]
+//   FactSalesQuota[DateKey]  -> DimDate[DateKey];  [RegionKey] -> DimRegion[RegionKey]
+//   FactInventory[DateKey]   -> DimDate[DateKey];  [ProductKey] -> DimProduct[ProductKey]
+//   FactFinance[DateKey]     -> DimDate[DateKey];  [AccountKey] -> DimAccount[AccountKey]
+//                            [ScenarioKey] -> DimScenario[ScenarioKey]
+//   DimEmployee[RegionKey]   -> DimRegion[RegionKey]
+//   SecurityMap: NO relationships (used only inside the RLS filter)
+// =====================================================================
+
+// ---------- SALES ----------
+Total Sales = SUM ( FactSales[SalesAmount] )
+Total Cost = SUM ( FactSales[TotalProductCost] )
+Gross Profit = [Total Sales] - [Total Cost]
+Margin % = DIVIDE ( [Gross Profit], [Total Sales] )
+Orders = DISTINCTCOUNT ( FactSales[SalesOrderNumber] )
+Units Sold = SUM ( FactSales[OrderQuantity] )
+Avg Order Value = DIVIDE ( [Total Sales], [Orders] )
+
+// ---------- TIME INTELLIGENCE ----------
+Sales YTD = TOTALYTD ( [Total Sales], DimDate[Date] )
+Gross Profit YTD = TOTALYTD ( [Gross Profit], DimDate[Date] )
+Sales PY = CALCULATE ( [Total Sales], SAMEPERIODLASTYEAR ( DimDate[Date] ) )
+Sales YoY Growth % = DIVIDE ( [Total Sales] - [Sales PY], [Sales PY] )
+Sales YTD PY = CALCULATE ( [Sales YTD], SAMEPERIODLASTYEAR ( DimDate[Date] ) )
+Sales YTD YoY % = DIVIDE ( [Sales YTD] - [Sales YTD PY], [Sales YTD PY] )
+
+Sales 3M Rolling Avg =
+VAR _Window = DATESINPERIOD ( DimDate[Date], MAX ( DimDate[Date] ), -3, MONTH )
+VAR _Months = CALCULATE ( DISTINCTCOUNT ( DimDate[YearMonth] ), _Window )
+RETURN DIVIDE ( CALCULATE ( [Total Sales], _Window ), _Months )
+
+Sales 12M Rolling =
+CALCULATE ( [Total Sales], DATESINPERIOD ( DimDate[Date], MAX ( DimDate[Date] ), -12, MONTH ) )
+
+// ---------- QUOTA ----------
+Quota = SUM ( FactSalesQuota[SalesAmountQuota] )
+Quota Attainment % =
+VAR _Reseller = CALCULATE ( [Total Sales], FactSales[Channel] = "Reseller" )
+RETURN DIVIDE ( _Reseller, [Quota] )     // quotas exist only for reseller reps
+
+// ---------- RANKING / SHARE ----------
+Region Sales Rank = RANKX ( ALL ( DimRegion[Region] ), [Total Sales],, DESC, DENSE )
+Share of Total Sales % = DIVIDE ( [Total Sales], CALCULATE ( [Total Sales], ALL ( DimRegion ) ) )
+
+// ---------- FINANCE ----------
+Finance Amount = SUM ( FactFinance[Amount] )
+Actual = CALCULATE ( [Finance Amount], DimScenario[ScenarioName] = "Actual" )
+Budget = CALCULATE ( [Finance Amount], DimScenario[ScenarioName] = "Budget" )
+Budget Variance = [Actual] - [Budget]
+Budget Variance % = DIVIDE ( [Budget Variance], ABS ( [Budget] ) )
+
+// ---------- SUPPLY CHAIN (inventory is a snapshot -> semi-additive) ----------
+Inventory Units = CALCULATE ( SUM ( FactInventory[UnitsBalance] ), LASTDATE ( DimDate[Date] ) )
+Inventory Value = CALCULATE ( SUM ( FactInventory[InventoryValue] ), LASTDATE ( DimDate[Date] ) )
+Units Out = SUM ( FactInventory[UnitsOut] )
+Days of Inventory = DIVIDE ( [Inventory Units], DIVIDE ( [Units Out], DISTINCTCOUNT ( DimDate[Date] ) ) )
+
+// ---------- HR ----------
+// DimEmployee is SCD Type 2: count only the current version of each employee.
+Headcount = CALCULATE ( COUNTROWS ( DimEmployee ), DimEmployee[EmploymentStatus] = "Active" )
+Avg Base Rate = CALCULATE ( AVERAGE ( DimEmployee[BaseRate] ), DimEmployee[EmploymentStatus] = "Active" )
+Avg Vacation Hours = CALCULATE ( AVERAGE ( DimEmployee[VacationHours] ), DimEmployee[EmploymentStatus] = "Active" )
+// Attrition: AdventureWorksDW has no reliable leaver flag (EndDate also marks SCD2 version changes).
+// For a credible attrition page, load IBM HR Analytics (Attrition = Yes/No) and use:
+//   Attrition % = DIVIDE ( CALCULATE ( COUNTROWS ( HR ), HR[Attrition] = "Yes" ), COUNTROWS ( HR ) )
+
+// ---------- DYNAMIC TITLE (for pages) ----------
+Region Title =
+VAR _n = DISTINCTCOUNT ( DimRegion[Region] )
+RETURN IF ( _n = 1, SELECTEDVALUE ( DimRegion[Region] ), "All accessible regions (" & _n & ")" )

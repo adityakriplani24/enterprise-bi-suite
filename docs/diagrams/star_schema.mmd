@@ -1,0 +1,13 @@
+erDiagram
+  DimDate ||--o{ FactSales : OrderDateKey
+  DimProduct ||--o{ FactSales : ProductKey
+  DimRegion ||--o{ FactSales : RegionKey
+  DimEmployee ||--o{ FactSales : EmployeeKey
+  DimRegion ||--o{ FactSalesQuota : RegionKey
+  DimDate ||--o{ FactSalesQuota : DateKey
+  DimDate ||--o{ FactInventory : DateKey
+  DimProduct ||--o{ FactInventory : ProductKey
+  DimDate ||--o{ FactFinance : DateKey
+  DimAccount ||--o{ FactFinance : AccountKey
+  DimScenario ||--o{ FactFinance : ScenarioKey
+  DimRegion ||--o{ DimEmployee : RegionKey
