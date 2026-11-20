@@ -18,8 +18,8 @@ The [Individual Reflection](Individual_Reflection.md) records the project owners
 
 The [evidence folder](evidence/) contains the evidence register and project-specific capture guides.
 
-- **DA-01 evidence:** actual Power BI report views, row-level security validation, SQL execution output and refresh history, where configured.
-- **DA-03 evidence:** actual local dashboard screenshots, Python pipeline output and automated test output.
+- **DA-01 evidence:** Power BI report file, report screenshots and role-context screenshots; SQL execution and Service refresh evidence are not included.
+- **DA-03 evidence:** two local dashboard screenshots; pipeline and test execution output are not included.
 - **Demo recordings:** links may be added when genuine recordings are available.
 
 Evidence is included only when it has been captured from the relevant application or execution environment. Project source files and test definitions are not presented as proof of successful runtime execution.
