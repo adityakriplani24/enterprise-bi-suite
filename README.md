@@ -42,7 +42,7 @@ A retail operations analytics prototype built around simulated inventory, sales,
 ```text
 DA-01/       Enterprise Business Intelligence Suite
 DA-03/       Retail and Supply Chain Control Tower
-submission/  Individual reflection template and submission information
+submission/  Individual reflection and supporting evidence
 README.md    Portfolio overview
 ```
 
