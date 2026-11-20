@@ -1,8 +1,9 @@
-# Test report
-The project includes three automated unit tests for KPI percentage bounds, forecast horizon row count, and non-negative what-if inventory.
+## Test report
 
-Run in a configured Python environment:
-```bash
-python -m unittest discover -s tests -v
-```
-The authoring environment previously ran three tests successfully. Re-run locally and retain the actual terminal output as evidence before claiming a fresh environment test.
+Three automated tests are included: KPI percentage bounds, seven-day forecast row count, and non-negative what-if inventory.
+
+Run from the DA-03 folder:
+
+    python -m unittest discover -s tests -v
+
+Execution evidence: These tests are committed as test code. They have not yet been executed against this exact committed repository version in the target laptop environment. Run the command and retain the terminal output before reporting a pass result.
