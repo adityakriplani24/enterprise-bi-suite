@@ -1,5 +1,7 @@
 # Data Analytics Internship Projects
 
+**Individual portfolio by Aditya Kriplani**
+
 A portfolio of two data analytics projects focused on enterprise business intelligence and retail supply chain visibility. The repository brings together data models, analytical logic, reporting assets, automation definitions and project documentation.
 
 ## DA-01 — Enterprise Business Intelligence Suite
