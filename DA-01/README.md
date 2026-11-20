@@ -1,67 +1,56 @@
-# Enterprise Business Intelligence Suite for a Multi-Region Company
+# DA-01 — Enterprise Business Intelligence Suite
 
-One Power BI reporting system combining **sales, finance, HR and supply chain** data from AdventureWorksDW, with **row-level security** so each regional manager sees only their own region.
+A multi-region business intelligence solution designed to bring sales, finance, HR and supply chain reporting into a unified Power BI environment, with region-based access control for business users.
 
-**Stack:** SQL Server · Power Query · DAX · Power BI Service · Azure Data Factory (or SQL Agent job fallback)
+## Features
+- SQL Server star-schema views built around sales, finance, inventory and sales quota data.
+- Power Query transformation steps for cleaning and shaping source data.
+- DAX measures and a semantic model for consolidated business reporting.
+- Regional row-level security using a security mapping table and the signed-in user's identity.
+- Executive and regional reporting workflows, including drill-through analysis.
+- SQL-based staging and refresh procedure, with Azure Data Factory and SQL Server Agent implementation options.
+- Data quality, DAX, row-level security and performance test documentation.
 
 ## Architecture
+The solution uses AdventureWorksDW as its sample source. SQL Server provides the reporting views and staging layer; Power Query prepares the data for the Power BI semantic model; DAX measures support reporting; and the security map applies region-level filtering.
 
 ```mermaid
 flowchart LR
-  A[AdventureWorksDW<br/>dbo tables] --> B[bi.* star-schema views<br/>SQL Server]
-  A -->|ADF Copy pipeline<br/>or SQL Agent job| C[stg.* staging + EtlLog]
-  B --> D[Power Query<br/>clean + shape]
-  D --> E[Power BI semantic model<br/>DAX measures + RLS]
-  S[bi.SecurityMap<br/>email -> region] --> E
-  E --> F[Power BI Service<br/>scheduled refresh]
-  F --> G[Executive pages + drill-through]
-  F --> H[Region managers<br/>filtered by USERPRINCIPALNAME]
+  A[AdventureWorksDW] --> B[SQL Server bi views]
+  A --> C[Staging and ETL]
+  B --> D[Power Query]
+  D --> E[Power BI semantic model]
+  S[Security map] --> E
+  E --> F[Executive and regional reports]
+  E --> G[Row-level security]
+  C --> H[ADF or SQL Agent refresh]
 ```
 
-### Star schema
-- **Facts:** `FactSales` (Internet + Reseller), `FactFinance`, `FactInventory`, `FactSalesQuota`
-- **Dimensions:** `DimDate`, `DimRegion`, `DimProduct`, `DimEmployee`, `DimAccount`, `DimScenario`
+## Data model
+- **Fact tables:** FactSales (Internet and Reseller), FactFinance, FactInventory and FactSalesQuota.
+- **Dimensions:** DimDate, DimRegion, DimProduct, DimEmployee, DimAccount and DimScenario.
+- **Security:** bi.SecurityMap maps user email addresses to permitted regions.
 
-## Repository layout
-```
-sql/01_star_schema_views.sql   star schema views, security map, ETL fallback proc, data quality checks
-dax/measures.dax               all measures + relationship spec
-docs/power_query_steps.md      Power Query shaping steps
-docs/test_plan.md              data, DAX, RLS and performance tests with results table
-docs/user_guide.md             one-page end-user guide
-docs/schedule_and_presentation.md   9-day plan, presentation outline, reflection template
-docs/evidence/                 screenshots (RLS tests, refresh history, performance)
-```
+## Repository contents
+- `sql/01_star_schema_views.sql` — reporting views, security map, ETL fallback procedure and data quality checks.
+- `sql/02_sql_agent_job.sql` — SQL Server Agent scheduling option.
+- `dax/measures.dax` — DAX measures and relationship specifications.
+- `power_query_steps.md` — Power Query transformation guidance.
+- `docs/test_plan.md` — data, DAX, RLS and performance test plan.
+- `docs/user_guide.md` — end-user reporting guide.
+- `docs/report_build_sheet.md` — page-by-page report build specification.
+- `docs/diagrams/` — architecture and star-schema diagrams.
+- `docs/final_presentation.pptx` — project presentation.
+- `adf/` — Azure Data Factory pipeline assets and configuration notes.
 
 ## Setup
-1. Install SQL Server (Developer/Express) and restore `AdventureWorksDW2022.bak` (Microsoft sample databases).
-2. Run `sql/01_star_schema_views.sql` in the `AdventureWorksDW` database. Edit the emails in `bi.SecurityMap`.
-3. Power BI Desktop: Get Data -> SQL Server -> import the `bi.*` views; follow `docs/power_query_steps.md`.
-4. Create relationships and measures from `dax/measures.dax`.
-5. Modeling -> Manage roles: create `RegionManager` and `Executive` (filters in `docs/test_plan.md`).
-6. Publish -> Dataset settings: configure credentials/gateway, set scheduled refresh, assign users to roles.
-7. Schedule `EXEC bi.usp_RefreshStaging` via SQL Server Agent (nightly) or build the equivalent ADF Copy pipeline.
+The project is designed for SQL Server with the AdventureWorksDW sample database and Power BI Desktop. The SQL scripts define the reporting layer and staging option; the Power Query, DAX and report documentation describe the semantic model and report configuration. Power BI Service refresh and role assignment require a separately configured workspace, credentials and gateway where applicable.
 
-## Key results (fill in with real numbers)
-| Metric | Value |
-|--------|-------|
-| Sales reconciliation SQL vs Power BI | |
-| RLS tests passed | /6 |
-| Slowest visual (ms) | |
-| Refresh duration | |
+## Security and validation
+The RegionManager and Executive roles are designed around the regional security mapping. The test plan documents validation scenarios for data quality, DAX calculations, row-level security and report performance. Actual test outcomes and service refresh evidence should be interpreted from the project evidence files; no live Power BI Service deployment is represented by this repository alone.
 
-## Known limitations
-- `FactFinance` is keyed by Organization, not sales region, so finance is shown to executives only.
-- AdventureWorksDW `DimEmployee` has no reliable leaver flag; attrition uses the IBM HR dataset if added.
-- Sample data covers roughly 2010-2014.
-
-## Team / ownership
-| Member | Owned |
-|--------|-------|
-| | |
-
-## Additional files
-- `docs/diagrams/` architecture and star schema (PNG + Mermaid source)
-- `docs/report_build_sheet.md` page-by-page Power BI build instructions
-- `docs/final_presentation.pptx` 10-minute deck (fill in the bracketed results)
-- `sql/02_sql_agent_job.sql` and `adf/` data-movement options
+## Assumptions and limitations
+- AdventureWorksDW is used as the primary sample source and represents historical sample data from approximately 2010–2014.
+- FactFinance is keyed by Organization rather than sales region, so finance reporting is intended for executive-level visibility.
+- AdventureWorksDW DimEmployee does not provide a reliable employee leaver flag; attrition analysis requires an additional HR dataset, such as the IBM HR sample dataset.
+- Azure Data Factory and Power BI Service assets require environment-specific configuration and credentials before operational use.
