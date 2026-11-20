@@ -1,41 +1,58 @@
-# Internship Data Analytics Projects
+# Data Analytics Internship Projects
 
-This public repository contains both assigned projects for the Data Analytics specialization.
+A portfolio of two data analytics projects focused on enterprise business intelligence and retail supply chain visibility. The repository brings together data models, analytical logic, reporting assets, automation definitions and project documentation.
 
-## DA-01 — Enterprise Business Intelligence Suite for a Multi-Region Company
-**Folder:** [DA-01/](DA-01/README.md)
+## DA-01 — Enterprise Business Intelligence Suite
 
-A Power BI-oriented BI solution using an AdventureWorksDW-style star schema, SQL views, DAX measures, Power Query shaping instructions, an Azure Data Factory pipeline example, regional row-level-security design, test plan and user guide.
+A multi-region business intelligence solution designed to consolidate sales, finance, HR and supply chain reporting in a Power BI environment, with region-based access control for business users.
 
-**Stack:** SQL Server · Power Query · DAX · Power BI · Azure Data Factory / scheduled SQL jobs.
+**Folder:** [DA-01](DA-01/README.md)
+
+**Technology stack:** SQL Server · Power Query · DAX · Power BI · Azure Data Factory · SQL Server Agent
+
+**Key components**
+- SQL Server star-schema views and staging/ETL assets.
+- Power Query transformation guidance and DAX measures.
+- Power BI semantic model and executive/regional reporting design.
+- Region-based row-level security using a security mapping table.
+- Data quality, DAX, RLS and performance test documentation.
+- Architecture diagrams, user guide and project presentation.
 
 ## DA-03 — Retail and Supply Chain Control Tower
-**Folder:** [DA-03/](DA-03/README.md)
 
-A simulated-data control-tower prototype for retail inventory, demand, suppliers and shipments. Includes a Python analytics pipeline, KPI definitions, z-score anomaly detection, shipment-delay flags, seven-day forecasting with Prophet/fallback, supplier-delay what-if analysis, PostgreSQL schema, Airflow DAG definition, Superset SQL queries, optional Slack/email alert code and a local interactive HTML demo.
+A retail operations analytics prototype built around simulated inventory, sales, supplier and shipment data. It brings operational KPIs, demand patterns, shipment delays and supplier performance into a consolidated control-tower view.
 
-**Stack:** Python · PostgreSQL · Apache Airflow · Apache Superset · Prophet · Slack/email.
+**Folder:** [DA-03](DA-03/README.md)
 
-## Repository layout
+**Technology stack:** Python · PostgreSQL · Apache Airflow · Apache Superset · Prophet · Slack/email
+
+**Key components**
+- Python pipeline for inventory, demand, supplier and shipment analytics.
+- Operational KPIs including stock-out rate, on-time delivery, supplier lead time and days of inventory.
+- Demand anomaly detection and shipment-delay flags.
+- Seven-day demand forecasting with Prophet and a moving-average fallback.
+- Supplier-delay what-if analysis.
+- PostgreSQL schema, Superset SQL starter queries and an hourly Airflow DAG definition.
+- Optional Slack/email alert code and a local interactive HTML dashboard prototype.
+
+## Repository structure
+
+```text
+DA-01/       Enterprise Business Intelligence Suite
+DA-03/       Retail and Supply Chain Control Tower
+submission/  Individual reflection template and submission information
+README.md    Portfolio overview
 ```
-DA-01/       Enterprise BI Suite: SQL, DAX, ADF, docs and existing presentation
-DA-03/       Supply Chain Control Tower: data, src, sql, airflow, tests, docs, dashboard
-submission/  Reflection template and submission guidance
-```
 
-## Scope and evidence notes
-- DA-03 input files are illustrative simulated data, not company/production data.
-- DA-03 `dashboard.html` is a local browser prototype; it is not a deployed Apache Superset service.
-- DA-03 Airflow DAG is a workflow definition; an Airflow scheduler has not been deployed by this repository change.
-- Slack/email integration requires credentials supplied securely through environment variables. No secrets belong in this repository.
-- DA-01 includes implementation artifacts and setup guidance. Do not describe Power BI Service refresh or live RLS as deployed unless independently configured and evidenced.
-- Test plans and code are not substitutes for genuine runtime screenshots or a screen recording. Add actual evidence after running the workflows.
+## Implementation notes
 
-## Before final portal submission
-1. Review both project READMEs and verify the code in your environment.
-2. Run the DA-03 pipeline and unit tests; retain the actual terminal output.
-3. Complete DA-01 validation and fill its result placeholders with measured results.
-4. Record a genuine demo for each project and add links/screenshots under the relevant docs/evidence folder.
-5. Complete `submission/Individual_Reflection_TEMPLATE.md` with your own work and learning.
-6. Confirm repository visibility is Public, then submit this repository URL.
+- DA-01 uses AdventureWorksDW sample data. Power BI Service refresh, workspace configuration and live row-level security depend on environment-specific setup.
+- DA-03 uses simulated data for demonstration and analysis; it does not contain production business data.
+- The DA-03 HTML dashboard is a local prototype rather than a deployed Apache Superset service.
+- The Airflow DAG provides a workflow definition; an operational scheduler requires a configured Airflow environment.
+- Alert delivery requires credentials supplied securely through environment variables.
+- Project documentation describes the intended validation approach. Runtime results and deployment status should be interpreted only from actual execution and available evidence.
 
+## Project documentation
+
+Each project folder contains its own README with its architecture, features, repository contents, setup context and implementation limitations. Refer to [DA-01](DA-01/README.md) and [DA-03](DA-03/README.md) for the individual project details.
