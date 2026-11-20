@@ -12,7 +12,7 @@ The project includes a local interactive dashboard, Python analytics pipeline, s
 
 ## Individual reflection
 
-The [Individual Reflection](Individual_Reflection_TEMPLATE.md) records the project ownership, learning, challenges, evidence and potential improvements from Aditya Kriplani's perspective.
+The [Individual Reflection](Individual_Reflection.md) records the project ownership, learning, challenges, evidence and potential improvements from Aditya Kriplani's perspective.
 
 ## Project evidence
 
