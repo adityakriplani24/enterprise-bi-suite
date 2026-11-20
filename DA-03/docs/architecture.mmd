@@ -1,0 +1,7 @@
+flowchart LR
+ A[Simulated feeds] --> B[PostgreSQL]
+ B --> C[Airflow hourly DAG]
+ C --> D[Python analytics]
+ D --> E[KPI + anomaly + forecast + what-if]
+ E --> F[Superset dashboards]
+ D --> G[Slack / Email alerts]

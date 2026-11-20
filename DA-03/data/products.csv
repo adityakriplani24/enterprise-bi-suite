@@ -1,0 +1,4 @@
+sku,product_name,category,unit_cost,reorder_point
+SKU1001,Wireless Mouse,Electronics,18,120
+SKU1002,USB-C Cable,Electronics,8,200
+SKU1003,Water Bottle,Home,12,90

@@ -1,0 +1,5 @@
+shipment_id,supplier_id,order_date,expected_delivery_date,actual_delivery_date,units,status
+SHP0001,SUP01,2026-11-01,2026-11-05,2026-11-05,100,Delivered
+SHP0002,SUP02,2026-11-02,2026-11-08,2026-11-11,150,Delivered
+SHP0003,SUP03,2026-11-03,2026-11-06,2026-11-05,80,Delivered
+SHP0004,SUP01,2026-11-05,2026-11-09,2026-11-14,120,Delivered
