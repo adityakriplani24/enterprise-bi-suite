@@ -8,11 +8,11 @@ Upload the corresponding screenshots to this directory using the filenames below
 
 | File name | Evidence | What it demonstrates |
 |---|---|---|
-| `executive-dashboard-overview.png` | Executive dashboard — overview | KPI cards and the report's sales, regional, time-based, and category visuals |
-| `executive-dashboard-filtered.png` | Executive dashboard — filtered state | A second report state with changed KPI values and visual results after filtering |
-| `rls-regionmanager-europe.png` | RegionManager — Europe | The SecurityMap rows visible while viewing as the Europe RegionManager role |
-| `rls-regionmanager-australia.png` | RegionManager — Australia | The SecurityMap row visible while viewing as the Pacific RegionManager role |
-| `rls-executive.png` | Executive role | The broader set of SecurityMap rows visible while viewing as the Executive role |
+| `Screenshot (41).png` | Executive dashboard — overview | KPI cards and the report's sales, regional, time-based, and category visuals |
+| `Screenshot (44).png` | Executive dashboard — filtered state | A second report state with changed KPI values and visual results after filtering |
+| `Screenshot (50).png` | RegionManager — Europe | The SecurityMap rows visible while viewing as the Europe RegionManager role |
+| `Screenshot (51).png` | RegionManager — Australia | The SecurityMap row visible while viewing as the Pacific RegionManager role |
+| `Screenshot (52).png` | Executive role | The broader set of SecurityMap rows visible while viewing as the Executive role |
 
 ## Capture context
 
@@ -28,4 +28,4 @@ The screenshots are supporting project evidence and should be read alongside the
 
 ## Files
 
-Add the five PNG screenshots listed in the evidence index to this folder. Keep the filenames consistent with the table so each item is easy to identify.
+All five PNG screenshots listed in the evidence index are present in this folder.
