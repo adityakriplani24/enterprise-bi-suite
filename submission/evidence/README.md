@@ -1,44 +1,34 @@
-# Project Evidence
+# Project Evidence Portfolio
 
-This folder contains genuine project evidence for the DA-01 and DA-03 internship projects. Evidence is added only after the relevant workflow has been opened or executed and the capture has been reviewed.
+This directory organizes supporting evidence for the two Data Analytics internship projects: DA-01 Enterprise Business Intelligence Suite and DA-03 Retail and Supply Chain Control Tower.
 
-## Evidence register
+## Evidence overview
 
-| Project | Evidence item | Current status | Source / location |
-|---|---|---|---|
-| DA-01 | Power BI report screenshots | Pending | Capture from the actual Power BI Desktop report |
-| DA-01 | RegionManager and Executive RLS screenshots | Pending | Capture actual View as / Test as role results |
-| DA-01 | SQL validation output | Pending | Capture actual SQL Server query results |
-| DA-01 | Power BI refresh history | Pending | Capture only if a Power BI Service refresh has been configured and run |
-| DA-03 | Local control-tower dashboard screenshots | Pending | Capture the committed `DA-03/dashboard.html` opened in a browser |
-| DA-03 | Python pipeline execution output | Pending | Capture actual terminal output after running the pipeline |
-| DA-03 | Automated unit-test output | Pending | Capture actual terminal output after running the three tests |
-| DA-03 | PostgreSQL / Superset / Airflow evidence | Not supplied | Add only if these services are configured and genuinely run |
+| Project | Evidence category | Evidence status |
+|---|---|---|
+| DA-01 | Power BI report views | Awaiting genuine application captures |
+| DA-01 | RegionManager and Executive row-level security | Awaiting validation captures, if configured |
+| DA-01 | SQL data-quality and reconciliation output | Awaiting execution captures |
+| DA-01 | Power BI Service refresh history | Applicable only where Service refresh is configured |
+| DA-03 | Local HTML dashboard | Dashboard screenshots supplied in the conversation; repository upload pending |
+| DA-03 | Python analytics pipeline | Awaiting actual terminal execution capture |
+| DA-03 | Automated unit tests | Awaiting actual terminal execution capture |
+| DA-03 | PostgreSQL, Superset and Airflow | No live service evidence currently included |
 
-## DA-03 capture steps
+## DA-01 — Enterprise Business Intelligence Suite
 
-1. Open `DA-03/dashboard.html` in Chrome or Edge.
-2. Capture the full dashboard with the simulated-data notice visible.
-3. Capture the KPI and chart sections.
-4. Move the supplier-delay what-if slider and capture the changed result.
-5. In a terminal opened in the `DA-03` folder, run `python src/pipeline.py` and capture the actual output.
-6. Run `python -m unittest discover -s tests -v` and capture the actual output. Do not label the tests as passed unless the command completes successfully.
+The DA-01 evidence set is intended to document the actual Power BI report experience, regional security behavior, SQL validation and refresh activity. The repository contains SQL, DAX, Power Query and ADF assets, architecture diagrams, documentation and a presentation. These project assets are distinct from runtime evidence.
 
-Save the screenshots in `DA-03/`.
+Project-specific evidence information is maintained in [DA-01 evidence](DA-01/README.md).
 
-## DA-01 capture steps
+## DA-03 — Retail and Supply Chain Control Tower
 
-1. Open the actual Power BI report in Power BI Desktop.
-2. Capture the Executive Overview and relevant regional report pages.
-3. If RLS has been configured, use **Modeling → View as** to capture the RegionManager and Executive results.
-4. Capture SQL validation output from the actual SQL Server environment.
-5. Capture Power BI Service refresh history only if a refresh has genuinely been configured and executed.
+The DA-03 evidence set documents the local HTML dashboard, Python pipeline output and automated test execution. The dashboard uses simulated sample data and is a local browser prototype; it is not a live Superset deployment.
 
-Save the screenshots in `DA-01/`.
+Project-specific evidence information is maintained in [DA-03 evidence](DA-03/README.md).
 
-## Evidence integrity
+## Evidence standards
 
-- Screenshots must show real application output, not mockups or recreated results.
-- Do not include passwords, API keys, personal data or confidential client information.
-- The DA-03 data is simulated. The local HTML dashboard is a prototype, not a live Superset deployment.
-- DA-01 source files and documentation do not, by themselves, prove that a Power BI Service deployment or RLS test has been completed.
+Evidence represents actual application screens or command output captured from the relevant environment. Test definitions, architecture diagrams and source code describe the implementation but do not establish that a workflow was executed successfully. No deployment, test pass or refresh result is claimed without corresponding genuine evidence.
+
+Screenshots and recordings should exclude passwords, API keys, confidential business information and personal data.
