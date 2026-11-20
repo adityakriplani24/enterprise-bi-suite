@@ -1,27 +1,26 @@
 # Project Evidence Portfolio
 
-This directory organizes supporting evidence for the two Data Analytics internship projects: DA-01 Enterprise Business Intelligence Suite and DA-03 Retail and Supply Chain Control Tower.
+This directory organizes supporting evidence for the two Data Analytics internship projects developed by **Aditya Kriplani**.
 
 ## Evidence overview
 
 | Project | Evidence category | Status |
 |---|---|---|
-| DA-01 | Power BI report views | Awaiting genuine application captures |
-| DA-01 | RegionManager and Executive row-level security | Awaiting validation captures, if configured |
-| DA-01 | SQL data-quality and reconciliation output | Awaiting execution captures |
-| DA-01 | Power BI Service refresh history | Applicable only where Service refresh is configured |
+| DA-01 | Power BI report screenshots | Five screenshots uploaded |
+| DA-01 | RegionManager and Executive role context | Screenshots uploaded; visual-level RLS behaviour is not independently established by the table captures |
+| DA-01 | Power BI report file | `DA-01/Enterprise_BI_Suite.pbix` uploaded |
+| DA-01 | SQL execution and Power BI Service refresh | No runtime or Service evidence included |
 | DA-03 | Local HTML dashboard | Two dashboard screenshots uploaded |
-| DA-03 | Python analytics pipeline | Awaiting actual terminal execution capture |
-| DA-03 | Automated unit tests | Awaiting actual terminal execution capture |
-| DA-03 | PostgreSQL, Superset and Airflow | No live service evidence currently included |
+| DA-03 | Python analytics pipeline and unit tests | Source and test code included; successful execution output not recorded |
+| DA-03 | PostgreSQL, Superset and Airflow | No live service deployment evidence included |
 
 ## DA-01 — Enterprise Business Intelligence Suite
 
-The DA-01 evidence set is intended to document actual Power BI report views, regional security behavior, SQL validation and refresh activity. The repository contains SQL, DAX, Power Query and ADF assets, architecture diagrams, documentation and a presentation. These assets describe the BI solution and its intended validation approach; they are distinct from runtime evidence.
+The DA-01 folder contains the Power BI report file, five Power BI Desktop screenshots, SQL, DAX, Power Query guidance, Azure Data Factory assets, architecture diagrams, documentation and the project presentation. The role screenshots show selected role context and SecurityMap rows; they should not be treated as proof of end-to-end visual-level RLS validation or a published Power BI Service deployment.
 
 ## DA-03 — Retail and Supply Chain Control Tower
 
-The DA-03 evidence set documents the local HTML dashboard, Python pipeline output and automated test execution. The dashboard uses simulated sample data and is a local browser prototype; it is not a live Superset deployment.
+The DA-03 folder contains two screenshots of the local HTML dashboard, Python analytics code, simulated datasets, PostgreSQL schema and queries, an Airflow DAG definition, test code and project documentation. The dashboard is a local prototype using simulated data, not a live Superset deployment.
 
 ## Evidence standards
 
