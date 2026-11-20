@@ -1,7 +1,24 @@
-# Azure Data Factory (optional path)
-Needs an Azure subscription (free credit or student plan) and a Self-hosted Integration Runtime if SQL Server is on your laptop.
-1. Create Data Factory; create linked services for source (SQL Server) and sink (Azure SQL or the same server).
-2. Create datasets `ds_sql_bi_factsales` (source view bi.FactSales) and `ds_sql_stg_factsales` (stg.FactSales).
-3. Import `pipeline_copy_factsales.json` (Author -> Pipeline -> ... -> Import from pipeline template or paste JSON).
-4. Add a Schedule trigger (daily 05:00 IST). Debug-run once; screenshot the green run into docs/evidence/.
-No Azure? Skip this folder and use sql/02_sql_agent_job.sql; say so in the README.
+# Azure Data Factory Integration
+
+The Azure Data Factory (ADF) component provides an optional orchestration path for moving enterprise business intelligence data from the SQL Server reporting layer into the staging environment.
+
+## Pipeline overview
+
+The included `pipeline_copy_factsales.json` defines a copy pipeline for the FactSales dataset.
+
+- **Source:** SQL Server reporting view `bi.FactSales`.
+- **Destination:** staging table `stg.FactSales`.
+- **Pipeline asset:** `pipeline_copy_factsales.json`.
+- **Scheduling concept:** daily refresh, with SQL Server Agent available as an alternative.
+
+## Environment requirements
+
+An Azure Data Factory instance and configured linked services are required. When the source SQL Server is hosted on a local machine or private network, an appropriately configured Self-hosted Integration Runtime may be required. The destination can be Azure SQL Database or an accessible SQL Server environment, depending on the deployment design.
+
+## Configuration context
+
+The JSON file is a pipeline definition asset and requires environment-specific linked services, datasets, connectivity and credentials before execution. A successful Azure pipeline run is not implied by the presence of this file.
+
+## Alternative orchestration
+
+For environments without Azure Data Factory, the repository includes `../sql/02_sql_agent_job.sql` as a SQL Server Agent scheduling option. The selected orchestration method depends on the available infrastructure.
